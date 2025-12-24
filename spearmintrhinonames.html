@@ -208,49 +208,59 @@
 
     <script>
         // Word banks for different levels
+        // Following the "Spearmint Rhino" model: normal words in weird combinations
         const wordBanks = {
             level1: {
-                adjectives: [
-                    'Funky', 'Cosmic', 'Groovy', 'Blazing', 'Chill', 'Dank', 'Epic',
-                    'Golden', 'Happy', 'Juicy', 'Lazy', 'Mellow', 'Neon', 'Purple',
-                    'Radical', 'Smooth', 'Stellar', 'Tipsy', 'Velvet', 'Wicked',
-                    'Electric', 'Dizzy', 'Hazy', 'Mystic', 'Retro', 'Trippy'
-                ],
-                nouns: [
-                    'Unicorn', 'Panda', 'Taco', 'Dragon', 'Flamingo', 'Narwhal', 'Platypus',
-                    'Penguin', 'Walrus', 'Sloth', 'Llama', 'Otter', 'Koala', 'Giraffe',
-                    'Phoenix', 'Octopus', 'Pineapple', 'Waffle', 'Pancake', 'Burrito',
-                    'Dolphin', 'Muffin', 'Nugget', 'Pickle', 'Donut', 'Pretzel'
+                // Level 1: Everyday words with mild absurdity when combined
+                words: [
+                    'Velvet', 'Golden', 'Silver', 'Purple', 'Crimson', 'Emerald', 'Sapphire',
+                    'Copper', 'Bronze', 'Ivory', 'Jade', 'Ruby', 'Pearl', 'Diamond',
+                    'Cinnamon', 'Vanilla', 'Chocolate', 'Caramel', 'Butterscotch', 'Peppermint', 'Spearmint',
+                    'Silk', 'Satin', 'Lace', 'Cotton', 'Leather', 'Suede', 'Denim',
+                    'Sugar', 'Honey', 'Maple', 'Cherry', 'Peach', 'Lemon', 'Lime',
+                    'Thunder', 'Lightning', 'Sunset', 'Moonlight', 'Starlight', 'Midnight',
+                    'Rhino', 'Elephant', 'Tiger', 'Leopard', 'Panther', 'Cobra', 'Eagle',
+                    'Falcon', 'Raven', 'Wolf', 'Bear', 'Lion', 'Jaguar', 'Cheetah',
+                    'Flamingo', 'Peacock', 'Hummingbird', 'Sparrow', 'Robin', 'Cardinal',
+                    'Dolphin', 'Whale', 'Shark', 'Octopus', 'Butterfly', 'Dragonfly',
+                    'Rose', 'Orchid', 'Lily', 'Daisy', 'Tulip', 'Lotus', 'Iris',
+                    'Whiskey', 'Brandy', 'Cognac', 'Bourbon', 'Rum', 'Tequila', 'Vodka'
                 ]
             },
             level2: {
-                adjectives: [
-                    'Transcendent', 'Kaleidoscope', 'Prismatic', 'Astral', 'Ethereal', 'Quantum',
-                    'Crystalline', 'Luminous', 'Hypnotic', 'Fractal', 'Chromatic', 'Vibrating',
-                    'Dimensional', 'Phosphorescent', 'Oscillating', 'Translucent', 'Radiant',
-                    'Nebulous', 'Iridescent', 'Spiraling', 'Morphing', 'Pulsating', 'Infinite'
-                ],
-                nouns: [
-                    'Consciousness', 'Mandala', 'Vortex', 'Prism', 'Chakra', 'Portal', 'Dimension',
-                    'Spiral', 'Wavelength', 'Frequency', 'Entity', 'Vision', 'Journey', 'Realm',
-                    'Serpent', 'Jaguar', 'Condor', 'Butterfly', 'Molecule', 'Atom', 'Cosmos',
-                    'Universe', 'Galaxy', 'Nebula', 'Deity', 'Oracle', 'Shaman'
+                // Level 2: More abstract/unusual but still real words - weirder combos
+                words: [
+                    'Tangerine', 'Chartreuse', 'Vermillion', 'Turquoise', 'Magenta', 'Cobalt', 'Maroon',
+                    'Obsidian', 'Onyx', 'Quartz', 'Granite', 'Marble', 'Opal', 'Amber',
+                    'Paprika', 'Saffron', 'Cardamom', 'Turmeric', 'Ginger', 'Cilantro', 'Basil',
+                    'Velour', 'Tweed', 'Cashmere', 'Flannel', 'Corduroy', 'Muslin', 'Chiffon',
+                    'Nectarine', 'Persimmon', 'Kumquat', 'Papaya', 'Mango', 'Guava', 'Lychee',
+                    'Monsoon', 'Cyclone', 'Tempest', 'Avalanche', 'Blizzard', 'Typhoon', 'Hurricane',
+                    'Aardvark', 'Mongoose', 'Platypus', 'Narwhal', 'Manatee', 'Walrus', 'Chinchilla',
+                    'Capybara', 'Armadillo', 'Porcupine', 'Hedgehog', 'Ferret', 'Badger', 'Weasel',
+                    'Pelican', 'Albatross', 'Toucan', 'Macaw', 'Parakeet', 'Cockatoo', 'Osprey',
+                    'Barracuda', 'Seahorse', 'Jellyfish', 'Starfish', 'Urchin', 'Anemone', 'Nautilus',
+                    'Hibiscus', 'Magnolia', 'Gardenia', 'Peony', 'Dahlia', 'Begonia', 'Azalea',
+                    'Absinthe', 'Vermouth', 'Chartreuse', 'Campari', 'Aperol', 'Sake', 'Mead'
                 ]
             },
             level3: {
-                adjectives: [
-                    'Omnidimensional', 'Sentient', 'Metaphysical', 'Interstitial', 'Subliminal',
-                    'Hyperdimensional', 'Disembodied', 'Effervescent', 'Liminal', 'Ephemeral',
-                    'Chthonic', 'Esoteric', 'Recursive', 'Paradoxical', 'Ineffable', 'Mercurial',
-                    'Protoplasmic', 'Telekinetic', 'Cosmological', 'Existential', 'Primordial',
-                    'Synchronistic', 'Archetypal', 'Hermetic', 'Akashic', 'Tantric', 'Gnostic'
-                ],
-                nouns: [
-                    'Tesseract', 'Singularity', 'Archetype', 'Hologram', 'Multiverse', 'Timeline',
-                    'Continuum', 'Membrane', 'Algorithm', 'Paradox', 'Void', 'Eternity', 'Infinity',
-                    'Consciousness', 'Godhead', 'Firmament', 'Zeitgeist', 'Simulacrum', 'Totem',
-                    'Leviathan', 'Chimera', 'Mythos', 'Prophecy', 'Revelation', 'Gnosis',
-                    'Kundalini', 'Merkaba', 'Equilibrium', 'Ouroboros', 'Philosopher'
+                // Level 3: Obscure, technical, medical, philosophical - maximum absurdity
+                words: [
+                    'Ultramarine', 'Viridian', 'Cerulean', 'Ochre', 'Umber', 'Sienna', 'Sepia',
+                    'Manganese', 'Tungsten', 'Chromium', 'Titanium', 'Zirconium', 'Selenium', 'Bismuth',
+                    'Cardamom', 'Fenugreek', 'Anise', 'Cumin', 'Coriander', 'Tarragon', 'Marjoram',
+                    'Angora', 'Merino', 'Mohair', 'Alpaca', 'Vicuna', 'Taffeta', 'Organza',
+                    'Persimmon', 'Quince', 'Medlar', 'Kumquat', 'Durian', 'Rambutan', 'Mangosteen',
+                    'Equinox', 'Solstice', 'Umbra', 'Penumbra', 'Eclipse', 'Nebula', 'Pulsar',
+                    'Lemur', 'Okapi', 'Axolotl', 'Pangolin', 'Tapir', 'Quokka', 'Binturong',
+                    'Stoat', 'Marmot', 'Vole', 'Shrew', 'Tenrec', 'Dhole', 'Caracal',
+                    'Kestrel', 'Kiwi', 'Cassowary', 'Ibis', 'Egret', 'Cormorant', 'Petrel',
+                    'Lamprey', 'Hagfish', 'Tardigrade', 'Nudibranch', 'Cuttlefish', 'Chambered', 'Mantis',
+                    'Aster', 'Clematis', 'Wisteria', 'Freesia', 'Anemone', 'Ranunculus', 'Delphinium',
+                    'Calvados', 'Pernod', 'Ouzo', 'Raki', 'Aquavit', 'Slivovitz', 'Fernet',
+                    'Thalamus', 'Cerebellum', 'Cortex', 'Synapse', 'Dendrite', 'Neuron', 'Axon',
+                    'Fibonacci', 'Algorithm', 'Theorem', 'Paradox', 'Axiom', 'Corollary', 'Lemma'
                 ]
             }
         };
@@ -270,10 +280,16 @@
         document.getElementById('generateBtn').addEventListener('click', function() {
             const bank = wordBanks[`level${currentLevel}`];
             
-            const randomAdj = bank.adjectives[Math.floor(Math.random() * bank.adjectives.length)];
-            const randomNoun = bank.nouns[Math.floor(Math.random() * bank.nouns.length)];
+            // Pick two random words from the same pool
+            const word1 = bank.words[Math.floor(Math.random() * bank.words.length)];
+            let word2 = bank.words[Math.floor(Math.random() * bank.words.length)];
             
-            const generatedName = `${randomAdj} ${randomNoun}`;
+            // Make sure we don't pick the same word twice
+            while (word1 === word2) {
+                word2 = bank.words[Math.floor(Math.random() * bank.words.length)];
+            }
+            
+            const generatedName = `${word1} ${word2}`;
             
             document.getElementById('resultName').textContent = generatedName;
             document.getElementById('resultLabel').textContent = `Level ${currentLevel} Generation`;
