@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Business Name Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .level-selector {
+            margin-bottom: 30px;
+        }
+
+        .level-selector h3 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .level-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .level-btn {
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .level-btn:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .level-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .level-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .level-desc {
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .generate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .generate-btn:active {
+            transform: scale(0.98);
+        }
+
+        .result-container {
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .result-name {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-label {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.8em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .result-name {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎭 Random Name Generator</h1>
+        <p class="subtitle">Inspired by "Spearmint Rhino" - Because why not?</p>
+
+        <div class="level-selector">
+            <h3>Select Your Reality Level:</h3>
+            <div class="level-buttons">
+                <button class="level-btn active" data-level="1">
+                    <div class="level-title">Level 1: College Stoner</div>
+                    <div class="level-desc">Mildly amusing, kinda random</div>
+                </button>
+                <button class="level-btn" data-level="2">
+                    <div class="level-title">Level 2: Been Dropping LSD Since the 60s</div>
+                    <div class="level-desc">Things are getting weird now</div>
+                </button>
+                <button class="level-btn" data-level="3">
+                    <div class="level-title">Level 3: Astronaut on Ayahuasca</div>
+                    <div class="level-desc">Your brain is floating through time and space</div>
+                </button>
+            </div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn">Generate Name</button>
+
+        <div class="result-container">
+            <div class="result-name" id="resultName">Click to generate!</div>
+            <div class="result-label" id="resultLabel"></div>
+        </div>
+
+        <div class="footer">
+            Made with questionable judgment and great humor
+        </div>
+    </div>
+
+    <script>
+        // Word banks for different levels
+        const wordBanks = {
+            level1: {
+                adjectives: [
+                    'Funky', 'Cosmic', 'Groovy', 'Blazing', 'Chill', 'Dank', 'Epic',
+                    'Golden', 'Happy', 'Juicy', 'Lazy', 'Mellow', 'Neon', 'Purple',
+                    'Radical', 'Smooth', 'Stellar', 'Tipsy', 'Velvet', 'Wicked',
+                    'Electric', 'Dizzy', 'Hazy', 'Mystic', 'Retro', 'Trippy'
+                ],
+                nouns: [
+                    'Unicorn', 'Panda', 'Taco', 'Dragon', 'Flamingo', 'Narwhal', 'Platypus',
+                    'Penguin', 'Walrus', 'Sloth', 'Llama', 'Otter', 'Koala', 'Giraffe',
+                    'Phoenix', 'Octopus', 'Pineapple', 'Waffle', 'Pancake', 'Burrito',
+                    'Dolphin', 'Muffin', 'Nugget', 'Pickle', 'Donut', 'Pretzel'
+                ]
+            },
+            level2: {
+                adjectives: [
+                    'Transcendent', 'Kaleidoscope', 'Prismatic', 'Astral', 'Ethereal', 'Quantum',
+                    'Crystalline', 'Luminous', 'Hypnotic', 'Fractal', 'Chromatic', 'Vibrating',
+                    'Dimensional', 'Phosphorescent', 'Oscillating', 'Translucent', 'Radiant',
+                    'Nebulous', 'Iridescent', 'Spiraling', 'Morphing', 'Pulsating', 'Infinite'
+                ],
+                nouns: [
+                    'Consciousness', 'Mandala', 'Vortex', 'Prism', 'Chakra', 'Portal', 'Dimension',
+                    'Spiral', 'Wavelength', 'Frequency', 'Entity', 'Vision', 'Journey', 'Realm',
+                    'Serpent', 'Jaguar', 'Condor', 'Butterfly', 'Molecule', 'Atom', 'Cosmos',
+                    'Universe', 'Galaxy', 'Nebula', 'Deity', 'Oracle', 'Shaman'
+                ]
+            },
+            level3: {
+                adjectives: [
+                    'Omnidimensional', 'Sentient', 'Metaphysical', 'Interstitial', 'Subliminal',
+                    'Hyperdimensional', 'Disembodied', 'Effervescent', 'Liminal', 'Ephemeral',
+                    'Chthonic', 'Esoteric', 'Recursive', 'Paradoxical', 'Ineffable', 'Mercurial',
+                    'Protoplasmic', 'Telekinetic', 'Cosmological', 'Existential', 'Primordial',
+                    'Synchronistic', 'Archetypal', 'Hermetic', 'Akashic', 'Tantric', 'Gnostic'
+                ],
+                nouns: [
+                    'Tesseract', 'Singularity', 'Archetype', 'Hologram', 'Multiverse', 'Timeline',
+                    'Continuum', 'Membrane', 'Algorithm', 'Paradox', 'Void', 'Eternity', 'Infinity',
+                    'Consciousness', 'Godhead', 'Firmament', 'Zeitgeist', 'Simulacrum', 'Totem',
+                    'Leviathan', 'Chimera', 'Mythos', 'Prophecy', 'Revelation', 'Gnosis',
+                    'Kundalini', 'Merkaba', 'Equilibrium', 'Ouroboros', 'Philosopher'
+                ]
+            }
+        };
+
+        let currentLevel = 1;
+
+        // Level button functionality
+        document.querySelectorAll('.level-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentLevel = parseInt(this.dataset.level);
+            });
+        });
+
+        // Generate name functionality
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const bank = wordBanks[`level${currentLevel}`];
+            
+            const randomAdj = bank.adjectives[Math.floor(Math.random() * bank.adjectives.length)];
+            const randomNoun = bank.nouns[Math.floor(Math.random() * bank.nouns.length)];
+            
+            const generatedName = `${randomAdj} ${randomNoun}`;
+            
+            document.getElementById('resultName').textContent = generatedName;
+            document.getElementById('resultLabel').textContent = `Level ${currentLevel} Generation`;
+        });
+
+        // Generate initial name
+        window.addEventListener('load', function() {
+            document.getElementById('generateBtn').click();
+        });
+    </script>
+</body>
+</html>
